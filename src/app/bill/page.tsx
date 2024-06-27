@@ -7,6 +7,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { submitDate } from "../billD/route";
 import * as XLSX from 'xlsx';
 
+
 function Bill() {
     const [date, setDate] = useState("");
     const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
@@ -72,7 +73,6 @@ function Bill() {
         XLSX.writeFile(wb, "BillData.xlsx");
     };
 
-    // Create 20 empty rows
     const emptyRows = Array.from({ length: 20 }, (_, index) => (
         <div className="table-row" key={`empty-${index}`}>
             <div className="table-cell"></div>
@@ -151,11 +151,12 @@ function Bill() {
                     <div className="table-header">NET</div>
 
                     {result.map((results) => (
+
                         <div className="table-row" key={results.id}>
                             <div className="table-cell">{results.username}</div>
                             <div className="table-cell">{results.item}</div>
                             <div className="table-cell">{cutFormatDate(results.date)}</div>
-                            <div className="table-cell">{results.expiry}</div>
+                            <div className="table-cell">{cutFormatDate(results.expiry)}</div>
                             <div className="table-cell">{results.lot_size}</div>
                             <div className="table-cell">{results.no_of_lot}</div>
                             <div className="table-cell">{results.buy_qty}</div>
@@ -173,7 +174,7 @@ function Bill() {
                         </div>
                     ))}
 
-                    {emptyRows}
+                    {/* {emptyRows} */}
                 </div>
                 </div>
             </div>

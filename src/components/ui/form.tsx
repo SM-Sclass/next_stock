@@ -54,6 +54,7 @@ const Form: React.FC = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // e.preventDefault()
     const requiredFields: (keyof FormData)[] = ["username", "date", "item", "expiry", "lotsize", "numberlot", "buyqty", "buyprice"];
     for (let key of requiredFields) {
       if (formData[key] === "") {
@@ -80,6 +81,7 @@ const Form: React.FC = () => {
     });
 
     console.log("THIS",response);
+    return false;
   };
 
   return (

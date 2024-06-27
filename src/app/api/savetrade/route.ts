@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import { ResultSetHeader } from 'mysql2';
 import { buy_net_price, sell_net_price } from '@/helpers/net_price';
+import { revalidatePath } from 'next/cache';
 
 export async function POST(req: NextRequest) {
   try {
@@ -32,6 +33,7 @@ export async function POST(req: NextRequest) {
     const insertId = result.insertId;
   
     console.log("Inserted trade with ID:", result);
+    revalidatePath('/')
     return NextResponse.json({ message: 'Trade saved successfully', tradeId: insertId }, { status: 201 });
 
 
